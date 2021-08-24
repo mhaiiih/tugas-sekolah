@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Uji Coba</title>
+    <style>
+      .container{
+        width: 700px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="form-group"></div>
+        <!--form nama-->
+        <h1><center>data siswa</center></h1>
+
+        <label for="namasiswa">Nama Siswa</label>
+        <input type="text" class="form-control" id="txt_namasiswa">
+
+        <label for="kelas">Kelas</label>
+        <select class="form-control" id="txt_kelas">
+          <option>X</option>
+          <option>XI</option>
+          <option>XII</option>          
+        </select>
+
+        <!--form alamat-->
+        <label for="alamat">Alamat</label>
+        <textarea class="form-control" id="txt_alamat" rows="3"></textarea>
+
+        <!--tombol-->
+        <button class="btn btn-primary m-2" onclick="add()">Simpan</button>
+        <button class="btn btn-danger m-2" onclick="update()">Update</button>
+        
+
+        <!--table-->
+        <table class="table mt-4">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Nama Siswa</th>
+              <th scope="col">Kelas</th>
+              <th scope="col">Alamat</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="datatampil">
+            
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <script>
+      
+      var namasiswa = []
+      var kelas = []
+      var alamat = []
+      id = null
+
+      
+      var tampil = document.getElementById('datatampil')
+
+      function show(){
+        tampil.innerHTML = ""
+
+        for(i = 0;i < namasiswa.length; i++){
+          nodata = i+1;
+          tampil.innerHTML += "<tr>"+
+              "<td>"+nodata+"</td>"+
+              "<td>"+namasiswa[i]+"</td>"+
+              "<td>"+kelas[i]+"</td>"+
+              "<td>"+alamat[i]+"</td>"+
+              "<td>"+
+                "<button class='btn btn-primary mr-2'  onclick='edit("+i+")'>Edit</button>"+
+                "<button class='btn btn-danger mr-2'   onclick='remove()'>Hapus</button>"+
+              "</td>"+
+            "</tr>"
+        }
+      }
+      
+
+      function add(){
+        // ambil data dari form
+        var namabaru = document.getElementById('txt_namasiswa').value
+        var kelasbaru = document.getElementById('txt_kelas').value
+        var alamatbaru = document.getElementById('txt_alamat').value
+
+        //simpan data ke array
+        namasiswa.push(namabaru)
+        kelas.push(kelasbaru)
+        alamat.push(alamatbaru)
+
+        //tampilan data lagi 
+        show()
+      }
+
+      //Remove atau menghapus
+      function remove(i){
+
+        //splice untuk menghapus elemen yang ada 
+        namasiswa.splice(i,1)
+        kelas.splice(i,1)
+        alamat.splice(i,1)
+        
+        show()
+      }
+
+      //Edit Data
+      function update(){
+        var editnama = document.getElementById('txt_namasiswa').value
+        var editkelas = document.getElementById('txt_kelas').value
+        var editalamat = document.getElementById('txt_alamat').value
+        namasiswa[id] = editnama
+        kelas[id] = editkelas
+        alamat[id] = editalamat
+
+        show()
+      }
+      //fuction edit
+      function edit(i){
+        var updatenama = document.getElementById('txt_namasiswa').value = namasiswa[i]
+        var updatekelas = document.getElementById('txt_kelas').value = kelas[i]
+        var updatealamat = document.getElementById('txt_alamat').value = alamat[i]
+        id = i 
+
+        show()
+      }
+
+      show()
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js,
+
+then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+</html>
